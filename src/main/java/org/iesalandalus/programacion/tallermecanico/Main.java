@@ -1,7 +1,15 @@
 package org.iesalandalus.programacion.tallermecanico;
 
-public class Main {
-    public static void main(String[] args) {
+import org.iesalandalus.programacion.tallermecanico.controlador.Controlador;
+import org.iesalandalus.programacion.tallermecanico.modelo.Modelo;
+import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
+import org.iesalandalus.programacion.tallermecanico.vista.Vista;
 
+public class Main {
+    public static void main(String[] args) throws TallerMecanicoExcepcion {
+        Modelo modelo = new Modelo();
+        Vista vista = new Vista();
+        Controlador controlador = new Controlador(modelo , vista);
+        controlador.comenzar();
     }
 }

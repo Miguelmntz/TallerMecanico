@@ -1,8 +1,7 @@
 package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class Cliente {
     private static final String ER_NOMBRE = "^[A-ZÁÉÍÓÚ][a-záéíóú]+( [A-ZÁÉÍÓÚ][a-záéíóú]+)*$";
@@ -10,7 +9,6 @@ public class Cliente {
     private static final String ER_TELEFONO = "\\d{9}";
     private static final String LETRAS_DNI = "TRWAGMYFPDXBNJZSQVHLCKE";
 
-    private static Pattern patron;
 
     private String nombre;
     private String dni;
