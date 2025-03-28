@@ -10,7 +10,7 @@ public class Mecanico extends Trabajo {
     private static final float FACTOR_HORA = 30;
     private float precioMaterial;
 
-    protected Mecanico(Cliente cliente, Vehiculo vehiculo, LocalDate fechaInicio) {
+    public Mecanico(Cliente cliente, Vehiculo vehiculo, LocalDate fechaInicio) {
         super(cliente, vehiculo, fechaInicio);
     }
 

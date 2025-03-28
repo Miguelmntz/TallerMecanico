@@ -12,9 +12,11 @@ public abstract class Trabajo {
     private static final float FACTOR_DIA = 10;
     protected LocalDate fechaInicio;
     protected LocalDate fechaFin;
-    protected int horas;
+    protected int horas = 0;
     protected Cliente cliente;
     protected Vehiculo vehiculo;
+
+
 
     protected Trabajo(Cliente cliente, Vehiculo vehiculo, LocalDate fechaInicio){
         setCliente(cliente);

@@ -98,7 +98,7 @@ public class Controlador {
     }
 
     public List<Revision> getRevisiones(Cliente cliente) {
-        return modelo.getRevisiones(cliente);
+        return modelo.getTrabajo(cliente);
     }
 
     public List<Revision> getRevisiones(Vehiculo vehiculo) {

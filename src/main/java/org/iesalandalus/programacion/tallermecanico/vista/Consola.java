@@ -4,6 +4,7 @@ import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepci
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
+import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 import java.time.LocalDate;
@@ -24,16 +25,16 @@ public class Consola {
     public static void mostrarMenu(){
         String cabecera = "Gestión Del Taller Mecánico";
         mostraCabecera(cabecera);
-        for (Opcion opcion : Opcion.values()) {
+        for (Evento opcion : Evento.values()) {
             System.out.println(opcion);
         }
     }
 
-    public static Opcion elegirOpcion() {
-        Opcion opcion = null;
+    public static Evento elegirOpcion() {
+        Evento opcion = null;
         do {
             try {
-                opcion = Opcion.get(leerEntero("\nElige una opción: "));
+                opcion = Evento.get(leerEntero("\nElige una opción: "));
             } catch (TallerMecanicoExcepcion e) {
                 System.out.printf("ERROR: %s%n", e.getMessage());
             }

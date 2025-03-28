@@ -6,6 +6,7 @@ import org.iesalandalus.programacion.tallermecanico.modelo.negocio.ITrabajos;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -69,14 +70,20 @@ public class Trabajos implements ITrabajos {
         }
     }
 
-    private Trabajo getTrabajoAbierto(Trabajo trabajo)throws TallerMecanicoExcepcion{
-        Objects.requireNonNull(trabajo,"La revisión no puede ser nula");
-        int indice = coleccionTrabajo.indexOf(trabajo);
-        if (indice == -1){
-            throw new TallerMecanicoExcepcion("No existe ningún trabajo abierto para dicho vehículo.");
+    private Trabajo getTrabajoAbierto(Vehiculo vehiculo)throws TallerMecanicoExcepcion{
+        Objects.requireNonNull(vehiculo,"No puedo operar sobre un vehiculo nulo");
+        Trabajo trabajoEncontrado = null;
+        Iterator<Trabajo> iteradorTrabajos = coleccionTrabajo.iterator();
+        while (iteradorTrabajos.hasNext() && trabajoEncontrado == null){
+            Trabajo trabajo = iteradorTrabajos.next();
+            if (trabajo.getVehiculo().equals(vehiculo) && !trabajo.estaCerrado()){
+                trabajoEncontrado = trabajo;
+            }
         }
-
-        return coleccionTrabajo.get(indice);
+        if (trabajoEncontrado == null){
+            throw new TallerMecanicoExcepcion("No existe ningún trabajo abierto para dicho vehiculo.");
+        }
+       return trabajoEncontrado;
     }
 
     @Override
@@ -85,7 +92,7 @@ public class Trabajos implements ITrabajos {
         if (horas <= 0) {
             throw new IllegalArgumentException("Las horas a añadir deben ser mayores que cero.");
         }
-        Trabajo trabajoExistente = getTrabajoAbierto(trabajo);
+        Trabajo trabajoExistente = getTrabajoAbierto(trabajo.getVehiculo());
         trabajoExistente.anadirHoras(horas);
         return trabajoExistente;
     }
@@ -93,7 +100,7 @@ public class Trabajos implements ITrabajos {
     @Override
     public Trabajo anadirPrecioMaterial(Trabajo trabajo, float precioMaterial) throws TallerMecanicoExcepcion{
         Objects.requireNonNull(trabajo, "No puedo añadir precio del material a un trabajo nulo.");
-        trabajo = getTrabajoAbierto(trabajo);
+        trabajo = getTrabajoAbierto(trabajo.getVehiculo());
         if (trabajo instanceof Revision) {
             throw new TallerMecanicoExcepcion("No se puede añadir precio al material para este tipo de trabajos.");
         }else if (trabajo instanceof Mecanico mecanico) {
@@ -109,7 +116,7 @@ public class Trabajos implements ITrabajos {
        if (fechaFin.isAfter(LocalDate.now())){
            throw  new IllegalArgumentException("La fecha de fin de revisión no puede ser posterior a la fecha de hoy.");
        }
-       Trabajo trabajoExistente = getTrabajoAbierto(trabajo);
+       Trabajo trabajoExistente = getTrabajoAbierto(trabajo.getVehiculo());
        if (fechaFin.isBefore(trabajoExistente.getFechaInicio())){
            throw new IllegalArgumentException("La fecha de fin de la revisión no puede ser anterior a la de inicio.");
        }
