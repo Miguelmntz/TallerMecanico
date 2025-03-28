@@ -44,7 +44,7 @@ public enum Evento {
        return eventos.containsKey(codigo);
     }
 
-    public  Evento get(int codigo) throws TallerMecanicoExcepcion{
+    public  static Evento get(int codigo) throws TallerMecanicoExcepcion{
         if (!esValida(codigo)){
             throw new TallerMecanicoExcepcion("El código no es correcto.");
         }
