@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.tallermecanico.vista.texto;
 
 
+import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
@@ -25,7 +26,7 @@ public class Consola {
         }
     }
 
-    static Evento elegirOpcion() {
+    static Evento elegirOpcion() throws TallerMecanicoExcepcion {
         return Evento.get(leerEntero("Ingrese el número correspondiente a su opción elegida del menú: "));
     }
 
