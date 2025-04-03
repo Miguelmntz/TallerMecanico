@@ -3195,7 +3195,7 @@
   <Codegen:External xmi:id="_4V5UAM78Ee6dsIuvGKkUNw" name="Cliente" base_Classifier="_4V23wc78Ee6dsIuvGKkUNw"/>
   <Codegen:External xmi:id="_4V-zkM78Ee6dsIuvGKkUNw" name="Vehiculo" base_Classifier="_4V8-YM78Ee6dsIuvGKkUNw"/>
   <Codegen:External xmi:id="_4WCd8M78Ee6dsIuvGKkUNw" name="Trabajo" base_Classifier="_4WAowc78Ee6dsIuvGKkUNw"/>
-  <Codegen:External xmi:id="_FbLIMM79Ee6dsIuvGKkUNw" name="org.iesalandalus.programacion.tallermecanico.vista.Vista" base_Classifier="_4VwxIM78Ee6dsIuvGKkUNw"/>
+  <Codegen:External xmi:id="_FbLIMM79Ee6dsIuvGKkUNw" name="org.iesalandalus.programacion.tallermecanico.vista.texto.Vista" base_Classifier="_4VwxIM78Ee6dsIuvGKkUNw"/>
   <Codegen:External xmi:id="_FbTrEM79Ee6dsIuvGKkUNw" name="Cliente" base_Classifier="_FbR14M79Ee6dsIuvGKkUNw"/>
   <Codegen:External xmi:id="_Fbbm4M79Ee6dsIuvGKkUNw" name="Vehiculo" base_Classifier="_FbZKoc79Ee6dsIuvGKkUNw"/>
   <Codegen:External xmi:id="_FbiUkM79Ee6dsIuvGKkUNw" name="Trabajo" base_Classifier="_FbeqMc79Ee6dsIuvGKkUNw"/>
