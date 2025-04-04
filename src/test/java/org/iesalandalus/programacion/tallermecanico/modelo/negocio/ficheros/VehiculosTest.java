@@ -1,8 +1,8 @@
-package org.iesalandalus.programacion.tallermecanico.modelo.negocio;
+package org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
-import org.iesalandalus.programacion.tallermecanico.modelo.negocio.memoria.Vehiculos;
+import org.iesalandalus.programacion.tallermecanico.modelo.negocio.IVehiculos;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ class VehiculosTest {
 
     private static Vehiculo vehiculo1;
     private static Vehiculo vehiculo2;
-    private IVehiculos iVehiculos;
+    private IVehiculos vehiculos;
 
     @BeforeAll
     static void setup() {
@@ -29,20 +29,23 @@ class VehiculosTest {
 
     @BeforeEach
     void init() {
-        iVehiculos = new Vehiculos();
+        vehiculos = Vehiculos.getInstancia();
+        for (Vehiculo vehiculo : vehiculos.get()) {
+            assertDoesNotThrow(() -> vehiculos.borrar(vehiculo));
+        }
     }
 
     @Test
     void constructorCreaVehiculosCorrectamente() {
-        assertNotNull(iVehiculos);
-        assertEquals(0, iVehiculos.get().size());
+        assertNotNull(vehiculos);
+        assertEquals(0, vehiculos.get().size());
     }
 
     @Test
     void getDevuelveVehiculosCorrectamente() {
-        assertDoesNotThrow(() -> iVehiculos.insertar(vehiculo1));
-        assertDoesNotThrow(() -> iVehiculos.insertar(vehiculo2));
-        List<Vehiculo> copiaVehiculos = iVehiculos.get();
+        assertDoesNotThrow(() -> vehiculos.insertar(vehiculo1));
+        assertDoesNotThrow(() -> vehiculos.insertar(vehiculo2));
+        List<Vehiculo> copiaVehiculos = vehiculos.get();
         assertEquals(vehiculo1, copiaVehiculos.get(0));
         assertSame(vehiculo1, copiaVehiculos.get(0));
         assertEquals(vehiculo2, copiaVehiculos.get(1));
@@ -51,61 +54,61 @@ class VehiculosTest {
 
     @Test
     void insertarVehiculoValidoInsertaCorrectamente() {
-        assertDoesNotThrow(() -> iVehiculos.insertar(vehiculo1));
-        assertEquals(vehiculo1, iVehiculos.buscar(vehiculo1));
-        assertSame(vehiculo1, iVehiculos.buscar(vehiculo1));
+        assertDoesNotThrow(() -> vehiculos.insertar(vehiculo1));
+        assertEquals(vehiculo1, vehiculos.buscar(vehiculo1));
+        assertSame(vehiculo1, vehiculos.buscar(vehiculo1));
     }
 
     @Test
     void insertarVehiculoNuloLanzaExcepcion() {
-        NullPointerException npe = assertThrows(NullPointerException.class, () -> iVehiculos.insertar(null));
+        NullPointerException npe = assertThrows(NullPointerException.class, () -> vehiculos.insertar(null));
         assertEquals("No se puede insertar un vehículo nulo.", npe.getMessage());
     }
 
     @Test
     void insertarVehiculoRepetidoLanzaExcepcion() {
-        assertDoesNotThrow(() -> iVehiculos.insertar(vehiculo1));
-        TallerMecanicoExcepcion tme = assertThrows(TallerMecanicoExcepcion.class, () -> iVehiculos.insertar(vehiculo1));
+        assertDoesNotThrow(() -> vehiculos.insertar(vehiculo1));
+        TallerMecanicoExcepcion tme = assertThrows(TallerMecanicoExcepcion.class, () -> vehiculos.insertar(vehiculo1));
         assertEquals("Ya existe un vehículo con esa matrícula.", tme.getMessage());
     }
 
     @Test
     void borrarVehiculoExistenteBorraVehiculoCorrectamente() {
-        assertDoesNotThrow(() -> iVehiculos.insertar(vehiculo1));
-        assertDoesNotThrow(() -> iVehiculos.borrar(vehiculo1));
-        assertNull(iVehiculos.buscar(vehiculo1));
+        assertDoesNotThrow(() -> vehiculos.insertar(vehiculo1));
+        assertDoesNotThrow(() -> vehiculos.borrar(vehiculo1));
+        assertNull(vehiculos.buscar(vehiculo1));
     }
 
     @Test
     void borrarVehiculoNoExistenteLanzaExcepcion() {
-        assertDoesNotThrow(() -> iVehiculos.insertar(vehiculo1));
-        TallerMecanicoExcepcion tme = assertThrows(TallerMecanicoExcepcion.class, () -> iVehiculos.borrar(vehiculo2));
+        assertDoesNotThrow(() -> vehiculos.insertar(vehiculo1));
+        TallerMecanicoExcepcion tme = assertThrows(TallerMecanicoExcepcion.class, () -> vehiculos.borrar(vehiculo2));
         assertEquals("No existe ningún vehículo con esa matrícula.", tme.getMessage());
     }
 
     @Test
     void borrarVehiculoNuloLanzaExcepcion() {
-        assertDoesNotThrow(() -> iVehiculos.insertar(vehiculo1));
-        NullPointerException npe = assertThrows(NullPointerException.class, () -> iVehiculos.borrar(null));
+        assertDoesNotThrow(() -> vehiculos.insertar(vehiculo1));
+        NullPointerException npe = assertThrows(NullPointerException.class, () -> vehiculos.borrar(null));
         assertEquals("No se puede borrar un vehículo nulo.", npe.getMessage());
     }
 
     @Test
     void busarVehiculoExistenteDevuelveVehiculoCorrectamente() {
-        assertDoesNotThrow(() -> iVehiculos.insertar(vehiculo1));
-        assertEquals(vehiculo1, iVehiculos.buscar(vehiculo1));
-        assertSame(vehiculo1, iVehiculos.buscar(vehiculo1));
+        assertDoesNotThrow(() -> vehiculos.insertar(vehiculo1));
+        assertEquals(vehiculo1, vehiculos.buscar(vehiculo1));
+        assertSame(vehiculo1, vehiculos.buscar(vehiculo1));
     }
 
     @Test
     void busarVehiculoNoExistenteDevuelveVehiculoNulo() {
-        assertNull(iVehiculos.buscar(vehiculo1));
+        assertNull(vehiculos.buscar(vehiculo1));
     }
 
     @Test
     void buscarVehiculoNuloLanzaExcepcion() {
-        assertDoesNotThrow(() -> iVehiculos.insertar(vehiculo1));
-        NullPointerException npe = assertThrows(NullPointerException.class, () -> iVehiculos.buscar(null));
+        assertDoesNotThrow(() -> vehiculos.insertar(vehiculo1));
+        NullPointerException npe = assertThrows(NullPointerException.class, () -> vehiculos.buscar(null));
         assertEquals("No se puede buscar un vehículo nulo.", npe.getMessage());
     }
 }
