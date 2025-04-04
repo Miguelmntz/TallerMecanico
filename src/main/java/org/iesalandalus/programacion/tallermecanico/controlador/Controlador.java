@@ -2,7 +2,6 @@ package org.iesalandalus.programacion.tallermecanico.controlador;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.Modelo;
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
-import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Mecanico;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Trabajo;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.ReceptorEventos;
@@ -25,7 +24,7 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void comenzar() {
+    public void comenzar() throws TallerMecanicoExcepcion {
         this.modelo.comenzar();
         this.vista.comenzar();
     }

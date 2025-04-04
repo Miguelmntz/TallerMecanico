@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.tallermecanico.vista.texto;
 
+import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.GestorEventos;
@@ -18,7 +19,7 @@ public class VistaTexto implements Vista {
     }
 
     @Override
-    public void comenzar() {
+    public void comenzar() throws TallerMecanicoExcepcion {
         Evento evento;
         do {
             Consola.mostrarMenu();

@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.tallermecanico.vista.texto;
 
+import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Trabajo;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
@@ -12,7 +13,7 @@ import java.util.List;
 public interface Vista {
     GestorEventos getGestorEventos();
 
-    void comenzar();
+    void comenzar() throws TallerMecanicoExcepcion;
 
     void terminar();
 
