@@ -21,7 +21,7 @@ public record Vehiculo(String marca, String modelo, String matricula) {
 
     private void validarModelo(String modelo) {
         Objects.requireNonNull(modelo, "El modelo no puede ser nulo.");
-        if (modelo.isBlank()){
+        if (modelo.isBlank()) {
             throw new IllegalArgumentException("El modelo no puede estar en blanco.");
         }
     }
@@ -40,9 +40,7 @@ public record Vehiculo(String marca, String modelo, String matricula) {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Vehiculo vehiculo = (Vehiculo) o;
+        if (!(o instanceof Vehiculo vehiculo)) return false;
         return Objects.equals(matricula, vehiculo.matricula);
     }
 
@@ -51,8 +49,10 @@ public record Vehiculo(String marca, String modelo, String matricula) {
         return Objects.hashCode(matricula);
     }
 
+
     @Override
     public String toString() {
         return String.format("%s %s - %s", marca, modelo, matricula);
     }
 }
+
